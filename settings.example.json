@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^(Bash|Artifact)$|^mcp__.*([Dd]eploy|[Pp]ublish|[Ss]end|[Ss]hare)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh \"$HOME/.claude/hooks/guard.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

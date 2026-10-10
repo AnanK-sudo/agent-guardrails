@@ -1,0 +1,32 @@
+{"tool_name":"Bash","tool_input":{"command":"gh auth switch"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"gh auth login --web"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"vercel teams switch acme"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"firebase login"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"gcloud config set account someone@example.com"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"git config --global user.email someone@example.com"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"git -C repo config user.name \"Someone Else\""},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"git -c user.email=someone@example.com commit -m wip"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"GIT_AUTHOR_EMAIL=someone@example.com git commit -m wip"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"GH_CONFIG_DIR=~/.config/gh-work gh api user"},"expect":"deny"}
+{"tool_name":"Bash","tool_input":{"command":"GH_CONFIG_DIR=~/.config/gh-personal gh api user"},"expect":"allow"}
+{"tool_name":"Bash","tool_input":{"command":"git config --global user.email\necho done"},"expect":"allow"}
+{"tool_name":"Bash","tool_input":{"command":"git config --get user.email"},"expect":"allow"}
+{"tool_name":"Bash","tool_input":{"command":"git push origin main"},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"git -C repo push --force-with-lease origin main"},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"git commit -m \"do not git push yet\""},"expect":"allow"}
+{"tool_name":"Bash","tool_input":{"command":"sh -c \"git push origin main\""},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"npx vercel --prod --yes"},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"npx vercel"},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"npx vercel --version"},"expect":"allow"}
+{"tool_name":"Bash","tool_input":{"command":"npx vercel inspect https://example.vercel.app"},"expect":"allow"}
+{"tool_name":"Bash","tool_input":{"command":"npx firebase-tools deploy --only hosting"},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"npm publish"},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"gh repo create owner/project --public"},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"gh repo view owner/project"},"expect":"allow"}
+{"tool_name":"Bash","tool_input":{"command":"gh api -X POST repos/owner/project/pages"},"expect":"ask"}
+{"tool_name":"Bash","tool_input":{"command":"gh api repos/owner/project/commits/main --jq .sha"},"expect":"allow"}
+{"tool_name":"Bash","tool_input":{"command":"gh workflow run pages.yml"},"expect":"ask"}
+{"tool_name":"Artifact","tool_input":{"action":"publish"},"expect":"ask"}
+{"tool_name":"Artifact","tool_input":{"action":"read"},"expect":"allow"}
+{"tool_name":"mcp__slack__send_message","tool_input":{},"expect":"ask"}
+{"tool_name":"mcp__docs__read","tool_input":{},"expect":"allow"}
